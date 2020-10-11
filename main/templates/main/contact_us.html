@@ -1,0 +1,43 @@
+<div 
+    class="modal fade" 
+    id="modalContact"
+    tabindex="-1"
+    aria-labelledby="modalContactLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalContactLabel">Contact Us</h5>
+                <button 
+                    type="button" 
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidded="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-outline mb-4">
+                        <input type="text" name="" id="nameInput" class="form-control">
+                        <label for="nameInput" class="form-label">Name</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="email" name="" id="emailInput" class="form-control">
+                        <label for="emailInput" class="form-label">Email</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <textarea name="" id="messageInput" rows="4" class="form-control"></textarea>
+                        <label for="messageInput" class="form-label">Email</label>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-dark mb-4">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

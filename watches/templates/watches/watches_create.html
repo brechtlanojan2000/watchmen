@@ -1,0 +1,233 @@
+{% extends 'admin/register.html' %}
+{% load static %}
+
+{% block form_register %}
+<div class="container px-5">
+    <ul class="stepper" id="stepper-form-watch" data-stepper="stepper" data-stepper-linear="true">
+        <form action="" method="post" class="needs-validation stepper-form" enctype="multipart/form-data">
+            <li class="stepper-step stepper-active">
+                <div class="stepper-head">
+                    <span class="stepper-head-icon">
+                        1
+                    </span>
+                    <span class="stepper-head-text">
+                        Watch
+                    </span>
+                </div>
+                <div class="stepper-content py-3">
+                    <div class="row">
+                        <div class="col-6">
+                            {% csrf_token %}
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="nameInput"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <label for="nameInput" class="form-label">Name</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <select name="brand" id="" class="select">
+                                {% for brand in brand_list %}
+                                    <option value="{{brand.id}}">{{brand.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <label class="form-label select-label">Brand</label>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="qty" 
+                                    id="qtyInput"
+                                    class="form-control"
+                                    maxlength="3"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <label for="qtyInput" class="form-label">Quantity</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="form-outline mb-4">
+                                <textarea
+                                    type="email"
+                                    name="description"
+                                    id="descInput"
+                                    rows="4"
+                                    autocomplete="off"
+                                    class="form-control"
+                                    required
+                                ></textarea>
+                                <label for="descInput" class="form-label">Description</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="price"
+                                    id="priceInput"
+                                    autocomplete="off"
+                                    class="form-control"
+                                    required
+                                >
+                                <label for="priceInput" class="form-label">Price</label>
+                            </div>
+                            <a id="next-step" class="btn btn-block btn-dark">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="stepper-step">
+                <div class="stepper-head">
+                    <span class="stepper-head-icon">
+                        2
+                    </span>
+                    <span class="stepper-head-text">
+                        Images
+                    </span>
+                </div>
+                <div class="stepper-content py-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-4 justify-content-center d-flex">
+                                <img
+                                    src="{% static 'watches/img/default.jpg' %}"
+                                    class="img-fluid"
+                                    id="main_image_view"
+                                    alt=""
+                                    width="150"
+                                />
+                            </div>
+                            <div class="form-file mb-4">
+                                <input 
+                                    type="file"
+                                    name="main_image"
+                                    class="form-file-input"
+                                    id="mainImageInput"
+                                    accept="image/*"
+                                    required
+                                />
+                                <label class="form-file-label" for="mainImageInput">
+                                    <span class="form-file-text" id="main_text">Choose file...</span>
+                                    <span class="form-file-button">Browse</span>
+                                </label>
+                            </div>
+                        </div>
+                        {% for x in num_images %}
+                            <div class="col-4">
+                                <div class="mb-4 justify-content-center d-flex">
+                                    <img
+                                        src="{% static 'watches/img/default.jpg' %}"
+                                        class="img-fluid"
+                                        id="image{{x}}_view"
+                                        alt=""
+                                        width="150"
+                                    />
+                                </div>
+                                <div class="form-file mb-4">
+                                    <input 
+                                        type="file"
+                                        name="imageOptional{{x}}"
+                                        class="form-file-input"
+                                        id="imageOptional{{x}}Input"
+                                        accept="image/*"
+                                    />
+                                    <label class="form-file-label" for="imageOptional{{x}}Input">
+                                        <span class="form-file-text" id="image{{x}}_text">Choose file...</span>
+                                        <span class="form-file-button">Browse</span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col-2">
+                            <a id="prev-step" class="btn btn-block btn-dark">Prev</a>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-block btn-dark">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </form>
+    </ul>
+</div>
+{% endblock form_register %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+            // Stepper Control
+            const stepper = new mdb.Stepper(document.getElementById('stepper-form-watch'));
+
+            document.getElementById('next-step').addEventListener('click', () => {
+                stepper.nextStep();
+            });
+
+            document.getElementById('prev-step').addEventListener('click', () => {
+                stepper.previousStep();
+            });
+
+            $('#mainImageInput').change(function (e){
+                var file = e.target.files[0];
+
+                $('#main_text').html(file.name);
+                $('#main_image_view').attr('src', URL.createObjectURL(file));
+            })
+
+            $('#imageOptional0Input').change(function (e){
+                console.log('a')
+                var file = e.target.files[0];
+
+                $('#image0_text').html(file.name);
+                $('#image0_view').attr('src', URL.createObjectURL(file));
+            })
+            
+            $('#imageOptional1Input').change(function (e){
+                console.log('a')
+                var file = e.target.files[0];
+
+                $('#image1_text').html(file.name);
+                $('#image1_view').attr('src', URL.createObjectURL(file));
+            })
+            
+            $('#imageOptional2Input').change(function (e){
+                console.log('a')
+                var file = e.target.files[0];
+
+                $('#image2_text').html(file.name);
+                $('#image2_view').attr('src', URL.createObjectURL(file));
+            })
+            
+            $('#imageOptional3Input').change(function (e){
+                console.log('a')
+                var file = e.target.files[0];
+
+                $('#image3_text').html(file.name);
+                $('#image3_view').attr('src', URL.createObjectURL(file));
+            })
+            
+            // Quantity Inputmask   
+            $('#qtyInput').inputmask({"mask": "9[9][9]"})
+            // Price Inputmask
+            $('#priceInput').inputmask({"mask": "999[9]\.99"})
+
+            $('#qtyInput').keyup(function() {
+                if($(this).val() == "") $(this).removeClass('active')
+                else $(this).addClass('active')
+            })
+
+            $('#priceInput').keyup(function() {
+                if($(this).val() == "") $(this).removeClass('active')
+                else $(this).addClass('active')
+            })
+        })
+    </script>
+{% endblock javascript %}

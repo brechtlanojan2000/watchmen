@@ -1,0 +1,44 @@
+{% extends 'admin/register.html' %}
+
+{% block form_register %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+            <div>
+                <img
+                    src=""
+                    class="img-fluid"
+                    id="image_view"
+                    alt=""
+                />
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-file mb-4">
+                <input type="file" name="image" class="form-file-input" id="brandInput" accept="image/*" required/>
+                <label class="form-file-label" for="brandInput">
+                    <span class="form-file-text">Choose file...</span>
+                    <span class="form-file-button">Browse</span>
+                </label>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="text" name="name" id="nameInput" class="form-control" value="{% if name %}{{name}}{% endif %}" required>
+                <label for="nameInput" class="form-label">Name</label>
+            </div>
+            <button type="submit" class="btn btn-block btn-dark">Add Brand</button>
+        </div>
+    </div>
+</form>
+{% endblock form_register %}
+
+{% block javascript %}
+    <script>
+        $(document).change(function (e) {
+            var file = e.target.files[0];
+
+            $('.form-file-text').html(file.name);
+            $('#image_view').attr('src', URL.createObjectURL(file));
+        })
+    </script>
+{% endblock javascript %}

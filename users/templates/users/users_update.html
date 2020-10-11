@@ -1,0 +1,492 @@
+{% extends 'admin/update.html' %}
+{% load static %}
+
+{% block form_update %}
+<div class="container px-5">
+    <ul class="stepper" id="stepper-form-user" data-stepper="stepper" data-stepper-linear="true">
+        <form action="" method="post" class="needs-validation stepper-form" enctype="multipart/form-data" novalidate>
+            {% comment %} Start Step 1 {% endcomment %}
+            <li class="stepper-step stepper-active">
+                <div class="stepper-head">
+                    <span class="stepper-head-icon">
+                        1
+                    </span>
+                    <span class="stepper-head-text">
+                        Personal
+                    </span>
+                </div>
+                <div class="stepper-content py-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                {% csrf_token %} {# I put here para di maguba ang design hehe #}
+                                <input 
+                                    type="text"
+                                    name="first_name"
+                                    id="firstName"
+                                    class="form-control"
+                                    maxlength="100"
+                                    value="{{user.first_name}}"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <label for="firstName" class="form-label">First Name</label>
+                            </div>            
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="middle_name"
+                                    id="middleName"
+                                    class="form-control"
+                                    maxlength="50"
+                                    autocomplete="off"
+                                    value="{% if user.middle_name is not None %}{{user.middle_name}}{% endif %}"
+                                >
+                                <label for="middleName" class="form-label">Middle Name</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="last_name"
+                                    id="lastName"
+                                    class="form-control"
+                                    maxlength="50"
+                                    autocomplete="off"
+                                    value="{{user.last_name}}"
+                                    required
+                                >
+                                <label for="lastName" class="form-label">Last Name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select name="gender" id="" class="select">
+                                <option {% if user.gender == 'M' %}selected{% endif %} value="M">Male</option>
+                                <option {% if user.gender == 'F' %}selected{% endif %} value="F">Female</option>
+                            </select>
+                            <label class="form-label select-label">Gender</label>    
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4 birthdate" data-toggle-button="false">
+                                <input
+                                    type="text"
+                                    name="date_of_birth"
+                                    id="dateBirth"
+                                    class="form-control"
+                                    value="{{ user.date_of_birth | date:"SHORT_DATE_FORMAT" }}"
+                                    data-toggle="datepicker"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <label for="dateBirth" class="form-label">Date of Birth</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <select name="status" id="statusInput" class="select">
+                                <option {% if user.status == 'S' %}selected{% endif %} value="S">Single</option>
+                                <option {% if user.status == 'M' %}selected{% endif %} value="M">Married</option>
+                                <option {% if user.status == 'W' %}selected{% endif %} value="W">Widowed</option>
+                            </select>
+                            <label class="form-label select-label">Status</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    id="phoneInput"
+                                    class="form-control"
+                                    value="{{user.phone}}"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <label for="phoneInput" class="form-label">Phone</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input 
+                                    type="text"
+                                    name="religion"
+                                    id="religionInput"
+                                    class="form-control"
+                                    maxlength="100"
+                                    value="{% if user.religion %}{{user.religion}}{% endif %}"
+                                    autocomplete="off"
+                                >
+                                <label for="religionInput" class="form-label">Religion</label>
+                            </div>   
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline mb-4">
+                                <input 
+                                    type="text"
+                                    name="height"
+                                    id="heightInput"
+                                    class="form-control"
+                                    maxlength="100"
+                                    value="{% if user.height %}{{user.height}}{% endif %}"
+                                    autocomplete="off"
+                                >
+                                <label for="heightInput" class="form-label">Height(cm)</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline mb-4">
+                                <input 
+                                    type="text"
+                                    name="weight"
+                                    id="weightInput"
+                                    class="form-control"
+                                    maxlength="100"
+                                    value="{% if user.weight %}{{user.weight}}{% endif %}"
+                                    autocomplete="off"
+                                >
+                                <label for="weightInput" class="form-label">Weight(kg)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="address" 
+                                    id="addressInput"
+                                    class="form-control"
+                                    maxlength="200"
+                                    value="{{user.address}}"
+                                    required
+                                    autocomplete="off"
+                                >
+                                <label for="addressInput" class="form-label">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="city"
+                                    id="cityInput"
+                                    class="form-control"
+                                    value="{{user.city}}"
+                                    required
+                                    autocomplete="off"
+                                >
+                                <label for="cityInput" class="form-label">Municipality/City</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="state" 
+                                    id="stateInput"
+                                    class="form-control"
+                                    value="{{user.state}}"
+                                    required
+                                    autocomplete="off"
+                                >
+                                <label for="stateInput" class="form-label">State</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="country" 
+                                    id="countryInput"
+                                    class="form-control"
+                                    value="{{user.country}}"
+                                    required
+                                    autocomplete="off"
+                                >
+                                <label for="countryInput" class="form-label">Country</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="zip_code" 
+                                    id="zipInput"
+                                    class="form-control"
+                                    maxlength="4"
+                                    value="{% if user.zip_code %}{{user.zip_code}}{% endif %}"
+                                    autocomplete="off"
+                                >
+                                <label for="zipInput" class="form-label">Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <a id="next-step" class="btn btn-block btn-dark">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% comment %} Start Step 2 {% endcomment %}
+            <li class="stepper-step">
+                <div class="stepper-head">
+                    <span class="stepper-head-icon">
+                        2
+                    </span>
+                    <span class="stepper-head-text">
+                        Family
+                    </span>
+                </div>
+                <div class="stepper-content py-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="mother_name" 
+                                    id="mother_nameInput"
+                                    class="form-control"
+                                    value="{% if user.mother_name %}{{user.mother_name}}{% endif %}"
+                                >
+                                <label for="mother_nameInput" class="form-label">Mother's Name</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="mother_occupation" 
+                                    id="mother_occupationInput"
+                                    class="form-control"
+                                    value="{% if user.mother_occupation %}{{user.mother_occupation}}{% endif %}"
+                                >
+                                <label for="mother_occupationInput" class="form-label">Mother's Occupation</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="father_name" 
+                                    id="father_nameInput"
+                                    class="form-control"
+                                    value="{% if user.father_name %}{{user.father_name}}{% endif %}"
+                                >
+                                <label for="father_nameInput" class="form-label">Father's Name</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="father_occupation" 
+                                    id="father_occupationInput"
+                                    class="form-control"
+                                    value="{% if user.father_occupation %}{{user.father_occupation}}{% endif %}"
+                                >
+                                <label for="father_occupationInput" class="form-label">Father's Occupation</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="spouse_name" 
+                                    id="spouse_nameInput"
+                                    class="form-control"
+                                    value="{% if user.spouse_name %}{{user.spouse_name}}{% endif %}"
+                                    disabled
+                                >
+                                <label for="spouse_nameInput" class="form-label">Spouse's Name</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="spouse_occupation" 
+                                    id="spouse_occupationInput"
+                                    class="form-control"
+                                    value="{% if user.spouse_occupation %}{{user.spouse_occupation}}{% endif %}"
+                                    disabled
+                                >
+                                <label for="spouse_occupationInput" class="form-label">Spouse's Occupation</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="steppercontrols">
+                        <div class="col-8"></div>
+                        <div class="col-2">
+                            <a id="prev-step" class="btn btn-block btn-dark">Prev</a>
+                        </div>
+                        <div class="col-2">
+                            <a id="next-step2" class="btn btn-block btn-dark">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% comment %} Start Step 3 {% endcomment %}
+            <li class="stepper-step">
+                <div class="stepper-head">
+                    <span class="stepper-head-icon">
+                        3
+                    </span>
+                    <span class="stepper-head-text">
+                        Account
+                    </span>
+                </div>
+                <div class="stepper-content py-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <div>
+                                <img
+                                    src="{{ user.profile.url }}"
+                                    class="img-fluid rounded-circle mx-4 px-2"
+                                    id="image_view"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-file mb-4">
+                                        <input 
+                                            type="file"
+                                            name="profile"
+                                            class="form-file-input"
+                                            id="profileInput"
+                                            accept="image/*"
+                                        />
+                                        <label class="form-file-label" for="profileInput">
+                                            <span class="form-file-text">{{user.profile}}</span>
+                                            <span class="form-file-button">Browse</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input
+                                            type="email"
+                                            name="email" 
+                                            id="emailInput"
+                                            class="form-control"
+                                            value="{{user.email}}"
+                                            required
+                                        >
+                                        <label for="emailInput" class="form-label">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-outline mb-4">
+                                        <input
+                                            type="password"
+                                            name="oldpassword" 
+                                            class="form-control"
+                                            id="passwordInputOld"
+                                            minlength="8"
+                                        >
+                                        <label for="passwordInputOld" class="form-label">Old Password</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input
+                                            type="password"
+                                            name="password1" 
+                                            class="form-control"
+                                            id="passwordInput1"
+                                            minlength="8"
+                                        >
+                                        <label for="passwordInput1" class="form-label">Password</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input
+                                            type="password"
+                                            name="password2" 
+                                            class="form-control"
+                                            minlength="8"
+                                            id="passwordInput2"
+                                        >
+                                        <label for="passwordInput2" class="form-label">Confirm Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6"></div>
+                                <div class="col-3">
+                                    <a id="prev-step2" class="btn btn-block btn-dark">Prev</a>
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-block btn-dark">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </form>
+    </ul>
+</div>
+{% endblock form_update %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+            // Stepper Control
+            const stepper = new mdb.Stepper(document.getElementById('stepper-form-user'));
+            document.getElementById('next-step').addEventListener('click', () => {
+                // Remove disable on spouse fields
+                var status = $('#statusInput').val()
+                if(status == 'M') {
+                    $('#spouse_nameInput').removeAttr('disabled')
+                    $('#spouse_occupationInput').removeAttr('disabled')
+                    $('#childNum').removeAttr('disabled')
+                } else {
+                    $('#spouse_nameInput').prop('disabled', true)
+                    $('#spouse_occupationInput').prop('disabled', true)
+                    $('#childNum').prop('disabled', true)
+                }
+                stepper.nextStep();
+            });
+            
+            document.getElementById('next-step2').addEventListener('click', () => {
+                stepper.nextStep();
+            });
+
+            document.getElementById('prev-step').addEventListener('click', () => {
+                stepper.previousStep();
+            });
+            
+            document.getElementById('prev-step2').addEventListener('click', () => {
+                stepper.previousStep();
+            });
+
+            // Profile Image Upload
+            $('#profileInput').change(function (e){
+                var file = e.target.files[0];
+
+                $('.form-file-text').html(file.name);
+                $('#image_view').attr('src', URL.createObjectURL(file));
+            })
+
+            // Phone Inputmasks
+            $("#phoneInput").inputmask({"mask": "(+63) 999 999 9999"});
+
+            $('#phoneInput').keyup(function() {
+                if($(this).val() == "") $(this).removeClass('active')
+                else $(this).addClass('active')
+            })
+
+            // Date Input max
+            var today = new Date()
+            var spanYear = today.getFullYear() - 18;
+            var spanYear2 = today.getFullYear() - 100;
+            
+            var datepicker = document.querySelector('.birthdate'); 
+            new mdb.Datepicker(datepicker, {
+                min: new Date(spanYear2, today.getMonth() + 1, today.getDate()),
+                max: new Date(spanYear, today.getMonth() + 1, today.getDate()),
+                format: 'yyyy-mm-dd',
+                startDate: new Date(spanYear, today.getMonth() + 1, today.getDate())
+            });
+            //$('#dateBirth').val(new Date($('#dateBirth').val()).toLocaleDateString().replaceAll(/\//g, '-'))
+        })
+    </script>
+{% endblock javascript %}

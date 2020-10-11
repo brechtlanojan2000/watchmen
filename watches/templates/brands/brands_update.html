@@ -1,0 +1,58 @@
+<div 
+    class="modal fade" 
+    id="modalEdit{{brand.id}}"
+    tabindex="-1"
+    aria-labelledby="modalEditLabel{{brand.id}}"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditLabel{{brand.id}}">{{brand.name}}</h5>
+                <button 
+                    type="button" 
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidded="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="object_id" value="{{brand.id}}">
+                    <input type="hidden" name="type_of_form" value="update">
+                    <div class="row">
+                        <div class="col-4">
+                            <div>
+                                <img
+                                    src="{{brand.image.url}}"
+                                    class="img-fluid"
+                                    id="image_view"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-outline mb-4">
+                                <input type="text" name="name" id="nameInput" class="form-control" value="{{brand.name}}">
+                                <label for="fnameInput" class="form-label">Name</label>
+                            </div>
+                            <div class="form-file mb-4">
+                                <input type="file" name="image" class="form-file-input" id="brandInput" accept="image/*"/>
+                                <label class="form-file-label" for="brandInput">
+                                    <span class="form-file-text">{{brand.image}}</span>
+                                    <span class="form-file-button">Browse</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-dark mb-4">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

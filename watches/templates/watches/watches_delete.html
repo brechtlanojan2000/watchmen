@@ -1,0 +1,33 @@
+<div 
+    class="modal fade" 
+    id="modalDel{{watch.id}}"
+    tabindex="-1"
+    aria-labelledby="modalDelLabel{{watch.id}}"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDelLabel{{watch.id}}">Watch Delete</h5>
+                <button 
+                    type="button" 
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidded="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="object_id" value="{{watch.id}}">
+                    <p>Are you sure to delete this product({{watch.name}})?</p>
+                    <button type="submit" class="btn btn-block btn-danger mb-4">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

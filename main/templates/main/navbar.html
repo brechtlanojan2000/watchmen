@@ -1,0 +1,66 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top {% if scroll %}navbar-scroll{% else %}bg-dark{% endif %}">
+        <div class="container">
+            <button 
+                class="navbar-toggler pl-0"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="toggleNav"
+            >
+                <span 
+                    class="navbar-toggler-icon d-flex justify-content-center align-items-center text-white"
+                    style="background-image:none"
+                >
+                    <i class="fas fa-bars"></i>
+                </span>
+            </button>
+            <a href="{% url 'index' %}" class="navbar-brand mr-auto">
+                <img src="{% static 'img/logo.png' %}" alt="watchmen-logo" style="height: 50px"> 
+                Watch<span class="text-danger">men</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Watches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link"
+                            data-toggle="modal"
+                            data-target="#modalAbout"
+                        >About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link"
+                            data-toggle="modal"
+                            data-target="#modalContact"
+                        >Contact</a>
+                    </li>
+                </ul>
+                <form action="" class="d-flex input-group w-auto mr-0 mr-lg-2">
+                    <input type="search" name="" id="" class="form-control">
+                    <button class="btn btn-outline-white" data-ripple-color="white">Search</button>
+                </form>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    {% if is_auth %}
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" id="btn-sign" class="nav-link btn btn-rounded btn-outline-white">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" id="btn-sign" class="nav-link btn btn-rounded btn-outline-white">Sign In</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

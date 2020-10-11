@@ -1,0 +1,106 @@
+{% extends 'admin/dashboard.html' %}
+
+{% block columns %}
+    <tr>
+        <th class="th-sm">Date Created</th>
+        <th class="th-sm">Name</th>
+        <th class="th-sm">Actions</th>
+    </tr>
+{% endblock columns %}
+
+{% block rows %}
+    {% for brand in brand_list %}
+        <tr>
+            <td>{{ brand.date_created | date:"SHORT_DATE_FORMAT" }}</td>
+            <td>{{ brand.name }}</td>
+            <td>
+                <button
+                    class="btn btn-outline-dark btn-floating btn-sm"
+                    data-ripple-color="dark"
+                    data-toggle="modal"
+                    data-target="#modalEdit{{brand.id}}"
+                >
+                    <i class="far fa-user-edit"></i>
+                </button>
+                <button
+                    class="btn btn-outline-danger btn-floating btn-sm ml-2"
+                    data-ripple-color="dark"
+                    data-toggle="modal"
+                    data-target="#modalDel{{brand.id}}"
+                >
+                    <i class="far fa-user-minus"></i>
+                </button>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock rows %}
+
+{% block modal %}
+    {% for brand in brand_list %}
+        {% include 'brands/brands_update.html' %}
+        {% include 'brands/brands_delete.html' %}
+    {% endfor %}
+{% endblock modal %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+            $('#toExcel').click(function() {
+                console.log("A")
+                $('.datatable-table').table2excel({
+                    filename: "Users.xls"
+                })
+            })
+
+            const datatable = new mdb.Datatable(document.getElementById('datatable'))
+
+            document.getElementById('tableSearch').addEventListener('input', (e) => {
+                datatable.search(e.target.value);
+            });
+
+            columns = [
+                {label: 'Date Created'},
+                {label: 'Name'},
+                {label: 'Actions'},
+            ]
+            
+            const data = datatable.rows 
+
+            $('.dateto > .datepicker-toggle-button').prop('disabled', true)
+
+            $('.datepicker-toggle-button').click(function() {
+                $('.datepicker-ok-btn, .datepicker-cancel-btn').click(function(){
+                    var dateFrom = $('#dateFrom').val()
+                    console.log(dateFrom)
+                    if(dateFrom != "") {
+                        $('#dateTo').removeAttr('disabled')
+                        $('.dateto > .datepicker-toggle-button').removeAttr('disabled')
+                    } else {
+                        $('#dateTo').prop('disabled', true)
+                        $('.dateto > .datepicker-toggle-button').prop('disabled', true)
+                    }
+                    
+                    var dateTo = $('#dateTo').val()
+
+                    if(dateTo != "" && moment(dateTo).isAfter(dateFrom)) {
+                        $('#dateFrom').prop('disabled', true)
+                        $('.datefrom > .datepicker-toggle-button').prop('disabled', true)
+                        var index = 0
+                        var newdata = []
+                        $.each(data, function(key, value) {
+                            if (moment(value.field_0).isBetween(dateFrom, dateTo, undefined, '[]')) {
+                                newdata[index++] = value
+                            }
+                        })
+                        console.log(newdata)
+                        datatable.update({rows: newdata})
+                    } else {
+                        $('#dateFrom').removeAttr('disabled')
+                        $('.datefrom > .datepicker-toggle-button').removeAttr('disabled')
+                        datatable.update({rows: data})
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock javascript %}

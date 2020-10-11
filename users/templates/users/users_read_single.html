@@ -1,0 +1,53 @@
+<div 
+    class="modal fade" 
+    id="modalReadSingle{{user.id}}"
+    tabindex="-1"
+>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3 text-center">
+                            <img 
+                                src="{{user.profile.url}}" 
+                                class="img-fluid rounded-circle"
+                                width="150"
+                                alt=""
+                            >
+                            <p class="font-weight-bold">{{user.name_casual}}</p>
+
+                            <a href="{% url 'user-update' user.id %}" class="btn btn-outline-dark mb-2">Update</a>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" style="text-align: left">
+                                <div class="col-6">
+                                    <p><b>Address:</b> {{user.full_address}}</p>
+                                    <p><b>Gender:</b> {% if user.gender == "M" %}Male{% else %}Female{% endif %}</p>
+                                    <p><b>Status:</b> {% if user.status == "S" %}Single{% else %}{% if user.status == "M" %}Married{% else %}Widowed{% endif %}{% endif %}</p>
+                                    <p><b>Phone:</b> {{user.phone}}</p>
+                                    <p><b>Religion:</b> {% if user.religion is not None %}{{user.religion}}{% else %}-{% endif %}</p>
+                                    <p><b>Height:</b> {% if user.height is not None %}{{user.height}}cm{% else %}-{% endif %}</p>
+                                    <p><b>Weight:</b> {% if user.weight is not None %}{{user.weight}}kg{% else %}-{% endif %}</p>
+                                </div>
+                                <div class="col-6">
+                                    <p><b>Mothers' Name:</b> {% if user.mother_name is not None %}{{user.mother_name}}{% else %}-{% endif %}</p>
+                                    <p><b>Mothers' Occupation:</b> {% if user.mother_occupation is not None %}{{user.mother_occupation}}{% else %}-{% endif %}</p>
+                                    <p><b>Fathers' Name:</b> {% if user.father_name is not None %}{{user.father_name}}{% else %}-{% endif %}</p>
+                                    <p><b>Fathers' Occupation:</b> {% if user.father_occupation is not None %}{{user.father_occupation}}{% else %}-{% endif %}</p>
+                                    {% if user.status == "M" %}
+                                        <p><b>Spouse Name:</b> {% if user.spouse_name is not None %}{{user.spouse_name}}{% else %}-{% endif %}</p>
+                                        <p><b>Spouse Occupation:</b> {% if user.spouse_occupation is not None %}{{user.spouse_occupation}}{% else %}-{% endif %}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-black" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

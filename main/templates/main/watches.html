@@ -1,0 +1,23 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block css_links %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock css_links %}
+
+{% block header %}
+    {% include 'main/navbar.html' %}
+{% endblock header %}
+
+{% block content %}
+
+{% endblock content %}
+
+{% block footer %}
+    {% include 'main/footer.html' %}
+{% endblock footer %}
+
+{% block modal %}
+    {% include 'main/about_us.html' %}
+    {% include 'main/contact_us.html' %}
+{% endblock modal %}

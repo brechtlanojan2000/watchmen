@@ -1,0 +1,93 @@
+{% load static %}
+<header>
+    <div
+        class="sidenav bg-dark"
+        id="sidenav-admin"
+        role="navigation"
+        data-mode="slide"
+        data-hidden="false"
+        data-color="light"
+        data-accordion="true"
+    >
+        <div class="text-center px-2 py-4">
+            <img
+                src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                class="rounded-circle mb-2"
+                height="50"
+                alt=""
+                loading="lazy"
+            />
+            <h5>Eunice Tanada</h5>
+        </div>
+        <hr class="m-0" />
+        <ul class="sidenav-menu">
+            <li class="sidenav-item">
+                <a href="" class="sidenav-link">
+                    <i class="far fa-home pr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                <ul class="sidenav-collapse">
+                    <li class="sidenav-item">
+                        <a href="{% url 'user-dashboard' %}" class="sidenav-link">
+                            Users
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="{% url 'brand-dashboard' %}" class="sidenav-link">
+                            Brands
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="{% url 'watch-dashboard' %}" class="sidenav-link">
+                            Watches
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidenav-item">
+                <a href="" class="sidenav-link">
+                    <i class="far fa-plus-circle pr-3"></i>
+                    <span>Register</span>
+                </a>
+                <ul class="sidenav-collapse">
+                    <li class="sidenav-item">
+                        <a href="{% url 'user-register' %}" class="sidenav-link">
+                            User
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="{% url 'brand-register' %}" class="sidenav-link">
+                            Brand
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="{% url 'watch-register' %}" class="sidenav-link">
+                            Watch
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidenav-item">
+                <a href="{% url 'logout' %}" class="sidenav-link">
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button
+                data-toggle="sidenav"
+                data-target="#sidenav-admin" 
+                class="btn shadow-0 p-0 mr-3 d-block d-xxl-none d-xl-none"
+                aria-controls="#sidenav-admin"
+                aria-haspopup="true">
+                <i class="fas fa-bars fa-lg text-white"></i>
+            </button>
+            <a class="navbar-brand mr-auto">
+                <img src="{% static 'img/logo.png' %}" style="height:50px"> Watch<span class="text-danger">Men</span>
+            </a>
+            {% comment %} href="{% if type_of_view == 'user' %}{% url 'user-dashboard' %}{% else %}{% url 'watch-dashboard' %}{% endif %}" {% endcomment %}
+        </div>
+    </nav>
+</header>

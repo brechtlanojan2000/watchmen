@@ -1,0 +1,35 @@
+<div 
+    class="modal fade" 
+    id="modalReadSingle{{watch.id}}"
+    tabindex="-1"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3">
+                            <img 
+                                src="{{watch.main_image.url}}" 
+                                class="img-fluid rounded-circle"
+                                width="200"
+                                alt=""
+                            >
+                            <a href="{% url 'watch-update' watch.id %}" class="btn btn-outline-dark mb-2">Update</a>
+                        </div>
+                        <div class="col-9" style="text-align: left">
+                            <p><b>Name:</b> {{watch.name}}</p>
+                            <p><b>Brand:</b> {{watch.brand}}</p>
+                            <p><b>Quantity:</b> {{watch.qty}}</p>
+                            <p><b>Price:</b> {{watch.price}}</p>
+                            <p><b>Description:</b> {{watch.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-black" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

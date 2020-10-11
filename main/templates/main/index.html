@@ -1,0 +1,127 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block css_links %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock css_links %}
+
+{% block header %}
+    {% include 'main/navbar.html' %}
+{% endblock header %}
+
+{% block content %}
+<!-- Intro -->
+<div id="intro" class="bg-image">
+    <div class="mask text-white" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="container d-flex align-items-center justify-content-center text-center h-100">
+            <div>
+                <hr class="white" style="height: 2px">
+                <h1 class="display-4 font-weight-bold">
+                    <em>Welcome to WATCH<span class="text-danger">MEN</span></em>
+                </h1>
+                <hr class="white" style="height: 2px">
+                <h4 class="text-uppercase white-text my-5 font-weight-bold spacing">feel the essence of a stylish watch</h4>
+                <a href="#endorsment" class="btn btn-rounded btn-outline-white" data-ripple-color="dark">Welcome</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intro -->
+<!-- Main -->
+<main class="my-5 py-5">
+    <!-- Endorsment -->
+    <section id="endorsment" class="mb-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-md-3">
+                    <div class="card bg-dark text-center text-white">
+                        <img src="{% static 'main/img/my1.jpeg' %}" class="card-img" style="height: 100%" />
+                        <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                            <div class="pb-lg-3 pb-md-5 px-5">
+                                <h1 class="card-title text-uppercase"><strong>N<span class="text-danger">a</span>viforce</strong></h1>
+                                <p class="card-text">Naviforce brings cool and style to your wrist at wallet-friendly prices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-md-3">
+                    <div class="card bg-dark text-center text-white">
+                        <img src="{% static 'main/img/my1.jpeg' %}" class="card-img" style="height: 100%" />
+                        <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                            <div class="pb-lg-3 pb-md-5 px-5">
+                                <h1 class="card-title text-uppercase"><strong>N<span class="text-danger">a</span>viforce</strong></h1>
+                                <p class="card-text">Naviforce brings cool and style to your wrist at wallet-friendly prices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-md-3">
+                    <div class="card bg-dark text-center text-white">
+                        <img src="{% static 'main/img/my1.jpeg' %}" class="card-img" style="height: 100%" />
+                        <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                            <div class="pb-lg-3 pb-md-5 px-5">
+                                <h1 class="card-title text-uppercase"><strong>N<span class="text-danger">a</span>viforce</strong></h1>
+                                <p class="card-text">Naviforce brings cool and style to your wrist at wallet-friendly prices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Endorsment -->
+    <!-- Brands -->
+    <section id="brands">
+        <div class="container">
+            <p class="display-4 font-weight-bold text-uppercase text-center mb-5">Most popular brands</p>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                {% for brand in brand_list %}
+                <div class="col">
+                    <div class="card bg-image hover-zoom ripple" data-ripple-color="light">
+                        <img src="{{brand.image.url}}" class="w-100" />
+                        <a href="#">
+                            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4);">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <p class="text-center text-white display-5 text-uppercase font-weight-bold mb-0">{{brand.name}}</p>
+                                </div>
+                            </div>
+                            <div class="hover-overlay">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% for x in comming_soon %}
+                <div class="col">
+                    <div class="card bg-image hover-zoom ripple" data-ripple-color="light">
+                        <img src="{% static 'main/img/brand2.jpeg' %}" class="w-100" />
+                        <a href="#">
+                            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4);">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <p class="text-center text-white display-5 text-uppercase font-weight-bold mb-0">Comming Soon</p>
+                                </div>
+                            </div>
+                            <div class="hover-overlay">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Brands -->
+</main>
+<!-- Main -->
+{% endblock content %}
+
+{% block footer %}
+    {% include 'main/footer.html' %}
+{% endblock footer %}
+
+{% block modal %}
+    {% include 'main/about_us.html' %}
+    {% include 'main/contact_us.html' %}
+{% endblock modal %}
