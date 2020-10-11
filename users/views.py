@@ -96,7 +96,6 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
             'spouse_name',
             'spouse_occupation',
         )
-        print(type(custom_user.date_of_birth))
         if form.is_valid():
             user = form.save(commit=False)
 
@@ -106,6 +105,8 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
                 user.__dict__[field] = data if data != '' else None
             user.zip_code = int(request.POST.get('zip_code')) if request.POST.get('zip_code') != '' else None
             user.profile = request.FILES.get('profile') if request.FILES.get('profile') is not None else 'profile/profile_default.png'
+            if request.POST.get('password1') != '' and request.POST.get('password1') != '' and request.POST.get('password1') == request.POST.get('password2'):
+                user.set_password(request.POST.get('password1'))
             user.save()
             return redirect('user-dashboard')
         else:
