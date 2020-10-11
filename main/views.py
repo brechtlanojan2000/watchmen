@@ -9,7 +9,6 @@ class IndexView(View):
     template_name = "main/index.html"
     
     def get(self, request, *args, **kwargs):
-        print(request.user.is_superuser)
         brands = Brand.objects.all()
         context = { 'title': 'Home', 'scroll': True, 'brand_list': brands, 'comming_soon': range(4 - len(brands)), 'is_auth': request.user.is_authenticated }
         return render(request, self.template_name, context=context)
@@ -19,6 +18,12 @@ class LoginView(View):
     
     def get(self, request, *args, **kwargs):
         context = { 'title': 'Login', 'scroll': False}
+
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                return redirect('user-dashboard')
+            else:
+                return redirect('index')
         return render(request, self.template_name, context=context)
 
     def post(self, request):
