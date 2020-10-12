@@ -11,13 +11,13 @@
     >
         <div class="text-center px-2 py-4">
             <img
-                src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                src="{{user.profile.url}}"
                 class="rounded-circle mb-2"
                 height="50"
                 alt=""
                 loading="lazy"
             />
-            <h5>Eunice Tanada</h5>
+            <h5>{{user.name_casual}}</h5>
         </div>
         <hr class="m-0" />
         <ul class="sidenav-menu">
@@ -69,7 +69,7 @@
             </li>
             <li class="sidenav-item">
                 <a href="{% url 'logout' %}" class="sidenav-link">
-                    <i class="far fa-sign-out-alt"></i>
+                    <i class="far fa-sign-out-alt pr-3"></i>
                     <span>Logout</span>
                 </a>
             </li>
